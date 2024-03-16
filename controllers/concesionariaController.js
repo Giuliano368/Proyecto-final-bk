@@ -16,9 +16,9 @@ const createAuto = async (req, res) => {
         const { data } = await axios.get('https://api.bluelytics.com.ar/v2/latest')
         const precioEnDolares = Math.round(req.body.precio / data.blue.value_avg)
 
-        const nuevoAuto = { ...req.body, precioDolares: precioEnDolares }
+        const nuevoAuto = { ...req.body, precioDolar: precioEnDolares }
 
-        await autoConcesionaria.create(req.body)
+        await autoConcesionaria.create(nuevoAuto)
 
         res.status(201).json({ auto: nuevoAuto, msg: 'Auto cargado exitosamente' })
     } catch (error) {
@@ -44,6 +44,7 @@ const actualizarAuto = async (req, res) => {
     }
 
 }
+
 
 const deleteAuto = async (req, res) => {
     try {
