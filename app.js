@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const compressionMiddleware = require('./middlewares/compression');
 
 const connect = require('./database/dbConection')
 
@@ -12,6 +13,8 @@ app.use('/test', (req, res) => {
 })
 
 app.use('/concesionaria', concesionariaRouter)
+
+app.use(compressionMiddleware);
 
 connect()
 
